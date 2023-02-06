@@ -1,48 +1,48 @@
 module transactions imports common {
 
-  type Transaction = Union [
+  type Transaction = Struct [
+    protocolVersion: Byte,
+    txEnvelope: TxEnvelope
+  ]
+
+  type TxEnvelope = Union [
     SelfSpawnTx,
     SpawnTx,
     LocalMethodCallTx,
-    ForeignMethodCallTx, //not supported in Genesis version of Spacemesh
+    ForeignMethodCallTx,
     TemplateDeployTx //not supported in Genesis version of Spacemesh
   ];
 
+  //type variant tag = 0
   type SelfSpawnTx = Struct [
-    protocolVersion: Byte,
-    txType: Byte = 0,
     template: Address,
     payload: TailWrapper
   ];
 
+  //type variant tag = 1
   type SpawnTx = Struct [
-    protocolVersion: Byte,
-    txType: Byte = 1,
     principal: Address,
     template: Address,
     payload: TailWrapper
   ];
 
+  //type variant tag = 2
   type LocalMethodCallTx = Struct [
-    protocolVersion: Byte,
-    txType: Byte = 2,
     principal: Address,
     methodSelector: uint16,
     payload: TailWrapper
   ];
 
+  //type variant tag = 3
   type ForeignMethodCallTx = Struct [
-    protocolVersion: Byte,
-    txType: Byte = 3,
     principal: Address,
     targetAccount: Address,
     methodSelector: uint16,
     payload: TailWrapper
   ];
 
+  //type variant tag = 4
   type TemplateDeployTx = Struct [
-    protocolVersion: Byte,
-    txType: Byte = 4,
     principal: Address,
     expectedTemplateAddress: Address,
     templateDefinition: TailWrapper

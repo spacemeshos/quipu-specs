@@ -7,5 +7,5 @@ module common {
   type CoinAmount = u64;
   type LayerHeight = u32;
   type Nonce = u64;
-  type Hash = Array[Byte](256);
+  type Hash = Array[Byte](32);
 }
