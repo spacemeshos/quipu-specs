@@ -13,27 +13,27 @@ module transactions imports common {
     TemplateDeployTx //not supported in Genesis version of Spacemesh
   ];
 
-  //type variant tag = 0
+  //implicit type variant tag = 0
   type SelfSpawnTx = Struct [
     template: Address,
     payload: TailWrapper
   ];
 
-  //type variant tag = 1
+  //implicit type variant tag = 1
   type SpawnTx = Struct [
     principal: Address,
     template: Address,
     payload: TailWrapper
   ];
 
-  //type variant tag = 2
+  //implicit type variant tag = 2
   type LocalMethodCallTx = Struct [
     principal: Address,
     methodSelector: uint16,
     payload: TailWrapper
   ];
 
-  //type variant tag = 3
+  //implicit type variant tag = 3
   type ForeignMethodCallTx = Struct [
     principal: Address,
     targetAccount: Address,
@@ -41,7 +41,7 @@ module transactions imports common {
     payload: TailWrapper
   ];
 
-  //type variant tag = 4
+  //implicit type variant tag = 4
   type TemplateDeployTx = Struct [
     principal: Address,
     expectedTemplateAddress: Address,
