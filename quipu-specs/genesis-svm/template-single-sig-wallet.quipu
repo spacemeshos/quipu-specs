@@ -120,7 +120,7 @@ module SingleSigWallet_Template imports common, svm_core, transactions {
       return MutableState()
     }
 
-    fun authorizeCall(enclosingTransaction: Transaction, caller: Address, method: u16, args: T): Boolean {
+    fun authorizeCall(enclosingTransaction: Transaction, caller: Address, method: u16, args: T, accountState: Account[IS,MS]): Boolean {
       return false
     }
   }
@@ -136,7 +136,7 @@ module SingleSigWallet_Template imports common, svm_core, transactions {
   behaviour AccountImpl(hostAPI: HostAPI, publicKey: Ed25519PublicKey) implements InstanceMethods {
 
     fun spend(recipient: Address, amount: CoinAmount): void {
-      hostAPI.transfer(recipient, amount): void
+      hostAPI.transfer(recipient, amount)
     }
 
   }

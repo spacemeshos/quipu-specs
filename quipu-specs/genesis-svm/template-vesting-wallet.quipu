@@ -103,7 +103,7 @@ module VestingWallet_Template imports common, svm_core, transactions {
       return MutableState()
     }
 
-    fun authorizeCall(enclosingTransaction: Transaction, caller: Address, method: u16, args: T): Boolean {
+    fun authorizeCall(enclosingTransaction: Transaction, caller: Address, method: u16, args: T, accountState: Account[IS,MS]): Boolean {
       return false
     }
 

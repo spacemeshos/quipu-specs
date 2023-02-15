@@ -51,12 +51,12 @@ module svm_core imports commons, transactions, global_state {
     //performs inter-account call authorization
     //returns true if this call should be accepted
     //returns true if this call should be refused
-    fun authorizeCall(enclosingTransaction: Transaction, caller: Address, method: u16, args: T): Boolean
+    fun authorizeCall(enclosingTransaction: Transaction, caller: Address, method: u16, args: T, accountState: Account[IS,MS]): Boolean
 
   }
 
-  //Methods exposed by the VM that are available to TemplateMountAPI implementations
-  interface TemplateMountSocket {
+  //Methods exposed by the VM that are available to template implementations
+  interface CommonVMServices {
     //validates Ed25519 signature
     fun signatureValidation(data: Wrapper, publicKey: Ed25519PublicKey, signature: Ed25519Sig)
 
@@ -68,10 +68,24 @@ module svm_core imports commons, transactions, global_state {
     //same as cryptoHashPure(values: Seq[Any]) but implicitly adds the Version Information Metadata
     //as first element of the list (before hashing)
     fun cryptoHashWithVIM(values: Seq[Any]): Hash
+
+    //gives access to the built-in serialization
+    fun quipu: QuipuSerializer
   }
 
-  //Host API (methods that VM exposes to template developers).
-  interface HostAPI {
+  //Build-in serialization feature
+  interface Quipu {
+
+
+    fun parse()
+
+    fun serialize()
+
+    fun
+  }
+
+  //Host API (VM features that can be used within implementations of template instance methods).
+  interface HostAPI extends CommonVMServices {
 
     //transfers specified amount of native coin (smesh) to specified account
     fun transfer(targetAccount: Address, amount: CoinAmount): void

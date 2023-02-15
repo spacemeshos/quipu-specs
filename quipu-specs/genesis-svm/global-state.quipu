@@ -1,7 +1,8 @@
 module global_state imports common {
 
   type Stub = Struct [
-    balance: CoinAmount
+    balance: CoinAmount,
+    nonce: Nonce
   ];
 
   type Account[IS,MS] = Struct [
